@@ -2,7 +2,7 @@
 pg_mem_counters
 ==============
 
-This is a smalI extension for keeping total and rpm counters in shared memory of PostgreSQL server.
+This is a small extension for keeping total and rpm counters in shared memory of PostgreSQL server.
 
 # Features
 
@@ -38,6 +38,8 @@ You need a development environment for PostgreSQL extensions:
     make USE_PGXS=1 clean    
     make USE_PGXS=1 all
     make USE_PGXS=1 install
+    
+    postgres=# create extension pg_mem_counters;
 
 result:
 
