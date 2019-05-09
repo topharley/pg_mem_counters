@@ -13,6 +13,12 @@ PostgreSQL PostgreSQL 10, 11 are supported.
 
 # Functions
 
+    FUNCTION inc_mem_counter(counter text, increment int8 default 0) RETURNS int8;
+    FUNCTION get_mem_counter_rpm(counter text) RETURNS int8;
+    FUNCTION mem_counters() RETURNS TABLE (name text, total int8, rpm int8);
+
+# Usage
+
 Add counter 'counter1' incremented with 1 hit and get total hits:
 
     postgres=# select inc_mem_counter('counter1', 1);
@@ -24,9 +30,11 @@ Get counter 'counter1' RPM:
     postgres=# select get_mem_counter_rpm('counter1');
 Get table of all counters with total hits and RPM:
 
-    postgres=# select * from metrics();
+    postgres=# select * from mem_counters();
 
 ## Configuration
+
+Edit postgresql.conf file, add extension to shared_preload_libraries:
 
     shared_preload_libraries = 'pg_mem_counters' # (change requires restart)
 
