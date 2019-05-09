@@ -5,7 +5,7 @@ CREATE FUNCTION inc_mem_counter(counter text, increment int8 default 0) RETURNS 
 	AS 'MODULE_PATHNAME'
 	LANGUAGE C VOLATILE;
 	
-CREATE FUNCTION get_mem_counter(counter text) RETURNS int8
+CREATE FUNCTION get_mem_counter_rpm(counter text) RETURNS int8
 	AS 'MODULE_PATHNAME'
 	LANGUAGE C VOLATILE;	
 
@@ -15,4 +15,4 @@ CREATE FUNCTION mem_counters() RETURNS TABLE (
 	rpm int8
 )
 AS 'MODULE_PATHNAME' LANGUAGE c STRICT;
-
+ 
