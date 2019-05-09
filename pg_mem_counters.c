@@ -68,8 +68,8 @@ typedef struct pgmcSharedEntry
 
 extern Datum inc_mem_counter(PG_FUNCTION_ARGS);
 PG_FUNCTION_INFO_V1(inc_mem_counter);
-extern Datum get_mem_counter_rpm(PG_FUNCTION_ARGS);
-PG_FUNCTION_INFO_V1(get_mem_counter_rpm);
+extern Datum get_mem_counter(PG_FUNCTION_ARGS);
+PG_FUNCTION_INFO_V1(get_mem_counter);
 extern Datum mem_counters(PG_FUNCTION_ARGS);
 PG_FUNCTION_INFO_V1(mem_counters);
 
@@ -110,7 +110,7 @@ inc_mem_counter(PG_FUNCTION_ARGS)
 
 	if (!_pgmc)
 	{
-		elog(ERROR, "inc_mem_counter: _pgmc is NULL! did you remember to add 'pg_mem_counters' to the shared_preload_libraries?");
+		elog(ERROR, "get_mem_counter: _pgmc is NULL! did you remember to add 'pg_mem_counters' to the shared_preload_libraries?");
 	}
 
 	counter = pgmc_upsert_counter(text_to_cstring(counter_name));
@@ -129,7 +129,7 @@ inc_mem_counter(PG_FUNCTION_ARGS)
 }
 
 Datum
-get_mem_counter_rpm(PG_FUNCTION_ARGS)
+get_mem_counter(PG_FUNCTION_ARGS)
 {
 	text *counter_name = PG_GETARG_TEXT_PP(0);
 	volatile pgmcCounterData *counter;
@@ -144,7 +144,7 @@ get_mem_counter_rpm(PG_FUNCTION_ARGS)
 
 	if (!_pgmc)
 	{
-		elog(ERROR, "get_mem_counter_rpm: _pgmc is NULL! did you remember to add 'pg_mem_counters' to the shared_preload_libraries?");
+		elog(ERROR, "get_mem_counter: _pgmc is NULL! did you remember to add 'pg_mem_counters' to the shared_preload_libraries?");
 	}
 
 	counter = pgmc_upsert_counter(text_to_cstring(counter_name));
@@ -177,7 +177,7 @@ mem_counters(PG_FUNCTION_ARGS)
 
 	if (!_pgmc)
 	{
-		elog(ERROR, "mem_counters: _pgmc is NULL! did you remember to add 'pg_mem_counters' to the shared_preload_libraries?");
+		elog(ERROR, "get_mem_counter: _pgmc is NULL! did you remember to add 'pg_mem_counters' to the shared_preload_libraries?");
 	}
 
 	/* switch to long-lived memory context */
